@@ -25,7 +25,7 @@ func main() {
 	customerRouter := customer.NewCustomerRouter(db)
 	customerRouter.Handle(router)
 
-	err = router.Run(":8080")
+	err = router.Run(":8081")
 	if err != nil {
 		fmt.Println("Error running server:", err)
 		return
