@@ -8,7 +8,7 @@ import (
 type AdminControllerInterface interface {
 	LoginAdmin(username, password string) (interface{}, error)
 	RegisterAdmin(req AdminParam) (interface{}, error)
-	CreateUser(user UserParam) (interface{}, error)
+	CreateUser(user CustomerParam) (interface{}, error)
 	DeleteUserById(id uint) error
 	GetAllUsers(first_name, last_name, email string, page, pageSize int) (interface{}, error)
 	SaveUsersFromAPI() (interface{}, error)
@@ -57,7 +57,7 @@ func (ctrl AdminController) RegisterAdmin(req AdminParam) (interface{}, error) {
 }
 
 // CreateUser Admin
-func (ctrl AdminController) CreateUser(req UserParam) (interface{}, error) {
+func (ctrl AdminController) CreateUser(req CustomerParam) (interface{}, error) {
 	newUser := &entities.Customer{
 		FirstName: req.FirstName,
 		LastName:  req.LastName,
@@ -77,7 +77,7 @@ func (ctrl AdminController) CreateUser(req UserParam) (interface{}, error) {
 			Message:      "Success",
 			ResponseTime: "",
 		},
-		Data: UserParam{
+		Data: CustomerParam{
 			FirstName: createdUser.FirstName,
 			LastName:  createdUser.LastName,
 			Email:     createdUser.Email,

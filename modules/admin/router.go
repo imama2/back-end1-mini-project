@@ -2,29 +2,27 @@ package admin
 
 import (
 	"back-end1-mini-project/middleware"
-	"back-end1-mini-project/repositories"
 	"github.com/gin-gonic/gin"
-	"gorm.io/gorm"
 )
 
 type AdminRouter struct {
 	adminHandler *AdminRequestHandler
 }
 
-func NewAdminRouter(db *gorm.DB) *AdminRouter {
-	adminRepo := repositories.NewAdminRepository(db)
-	adminUsecase := AdminUseCase{
-		adminRepo: adminRepo,
-	}
-	adminController := AdminController{
-		uc: adminUsecase,
-	}
-	adminHandler := NewAdminRequestHandler(&adminController)
-
-	return &AdminRouter{
-		adminHandler: adminHandler,
-	}
-}
+//func NewAdminRouter(db *gorm.DB) *AdminRouter {
+//	adminRepo := repositories.NewAdminRepository(db)
+//	adminUsecase := AdminUseCase{
+//		adminRepo: adminRepo,
+//	}
+//	adminController := AdminController{
+//		uc: adminUsecase,
+//	}
+//	adminHandler := NewAdminRequestHandler(&adminController)
+//
+//	return &AdminRouter{
+//		adminHandler: adminHandler,
+//	}
+//}
 
 func (r *AdminRouter) Handle(router *gin.Engine) {
 	basePath := "/account-admin"

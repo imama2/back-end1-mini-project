@@ -5,7 +5,7 @@ import (
 	"gorm.io/gorm"
 )
 
-type SuperAdminRepository interface {
+type SuperAdminRepositoryInterface interface {
 	// Admin
 	CreateSuperAdmin(superAdmin *entities.Account) (*entities.Account, error)
 	ApproveAdminRegistration(id uint) error

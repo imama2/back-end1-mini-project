@@ -51,7 +51,7 @@ func (handler *AdminRequestHandler) RegisterAdmin(c *gin.Context) {
 }
 
 func (handler *AdminRequestHandler) CreateCustomer(c *gin.Context) {
-	request := UserParam{}
+	request := CustomerParam{}
 
 	if err := c.Bind(&request); err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})

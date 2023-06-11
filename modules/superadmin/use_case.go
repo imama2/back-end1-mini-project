@@ -22,7 +22,7 @@ type UsecaseSuperadminInterface interface {
 }
 
 type UsecaseSuperadmin struct {
-	superadminRepo repositories.SuperAdminRepository
+	SuperadminRepo repositories.SuperAdminRepositoryInterface
 }
 
 func (uc UsecaseSuperadmin) CreateSuperadmin(superadmin SuperAdminParam) (*entities.Account, error) {
@@ -38,7 +38,7 @@ func (uc UsecaseSuperadmin) CreateSuperadmin(superadmin SuperAdminParam) (*entit
 		UpdatedAt: time.Now(),
 	}
 
-	createSuperadmin, err := uc.superadminRepo.CreateSuperAdmin(newSuperadmin)
+	createSuperadmin, err := uc.SuperadminRepo.CreateSuperAdmin(newSuperadmin)
 	if err != nil {
 		return nil, err
 	}
@@ -47,7 +47,7 @@ func (uc UsecaseSuperadmin) CreateSuperadmin(superadmin SuperAdminParam) (*entit
 }
 
 func (uc UsecaseSuperadmin) LoginSuperadmin(id uint, username, password string) (*entities.Account, string, error) {
-	superadmin, err := uc.superadminRepo.LoginSuperAdmin(username)
+	superadmin, err := uc.SuperadminRepo.LoginSuperAdmin(username)
 	if err != nil {
 		return nil, "", err
 	}
@@ -77,7 +77,7 @@ func (uc UsecaseSuperadmin) CreateCustomer(user CustomerParam) (entities.Custome
 		UpdatedAt: time.Now(),
 	}
 
-	_, err := uc.superadminRepo.CreateCustomer(newCustomer)
+	_, err := uc.SuperadminRepo.CreateCustomer(newCustomer)
 	if err != nil {
 		return *newCustomer, err
 	}
@@ -87,16 +87,16 @@ func (uc UsecaseSuperadmin) CreateCustomer(user CustomerParam) (entities.Custome
 
 func (uc UsecaseSuperadmin) DeleteCustomerByID(id uint) error {
 	// Get existing user data
-	existingData, err := uc.superadminRepo.GetCustomerById(id)
+	existingData, err := uc.SuperadminRepo.GetCustomerById(id)
 	if err != nil {
 		return err
 	}
 
-	return uc.superadminRepo.DeleteCustomerById(id, existingData)
+	return uc.SuperadminRepo.DeleteCustomerById(id, existingData)
 }
 
 func (uc UsecaseSuperadmin) GetAllCustomers(firstName, lastName, email string, page, pageSize int) ([]*entities.Customer, error) {
-	users, err := uc.superadminRepo.GetAllCustomers(firstName, lastName, email, page, pageSize)
+	users, err := uc.SuperadminRepo.GetAllCustomers(firstName, lastName, email, page, pageSize)
 	if err != nil {
 		return nil, err
 	}
@@ -105,7 +105,7 @@ func (uc UsecaseSuperadmin) GetAllCustomers(firstName, lastName, email string, p
 }
 
 func (uc UsecaseSuperadmin) ApprovedAdminRegister(id uint) error {
-	err := uc.superadminRepo.ApproveAdminRegistration(id)
+	err := uc.SuperadminRepo.ApproveAdminRegistration(id)
 	if err != nil {
 		return err
 	}
@@ -114,7 +114,7 @@ func (uc UsecaseSuperadmin) ApprovedAdminRegister(id uint) error {
 }
 
 func (uc UsecaseSuperadmin) RejectedAdminRegister(id uint) error {
-	err := uc.superadminRepo.RejectAdminRegistration(id)
+	err := uc.SuperadminRepo.RejectAdminRegistration(id)
 	if err != nil {
 		return err
 	}
@@ -123,7 +123,7 @@ func (uc UsecaseSuperadmin) RejectedAdminRegister(id uint) error {
 }
 
 func (uc UsecaseSuperadmin) UpdateActivedAdmin(id uint, isActive bool) error {
-	err := uc.superadminRepo.UpdateAdminActiveStatus(id, isActive)
+	err := uc.SuperadminRepo.UpdateAdminActiveStatus(id, isActive)
 	if err != nil {
 		return err
 	}
@@ -132,7 +132,7 @@ func (uc UsecaseSuperadmin) UpdateActivedAdmin(id uint, isActive bool) error {
 }
 
 func (uc UsecaseSuperadmin) UpdateDeadactivedAdmin(id uint) error {
-	err := uc.superadminRepo.UpdateDeadactivedAdmin(id)
+	err := uc.SuperadminRepo.UpdateDeadactivedAdmin(id)
 	if err != nil {
 		return err
 	}
@@ -141,7 +141,7 @@ func (uc UsecaseSuperadmin) UpdateDeadactivedAdmin(id uint) error {
 }
 
 func (uc UsecaseSuperadmin) GetApprovalRequest() ([]*entities.Account, error) {
-	accounts, err := uc.superadminRepo.GetApprovalRequests()
+	accounts, err := uc.SuperadminRepo.GetApprovalRequests()
 	if err != nil {
 		return nil, err
 	}
@@ -162,7 +162,7 @@ func (uc UsecaseSuperadmin) GetApprovalRequest() ([]*entities.Account, error) {
 }
 
 func (uc UsecaseSuperadmin) GetAllAdmins(username string, page, pageSize int) ([]*entities.Account, error) {
-	admins, err := uc.superadminRepo.GetAllAdmins(username, page, pageSize)
+	admins, err := uc.SuperadminRepo.GetAllAdmins(username, page, pageSize)
 	if err != nil {
 		return nil, err
 	}

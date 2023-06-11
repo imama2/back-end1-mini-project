@@ -3,6 +3,7 @@ package admin
 import (
 	"back-end1-mini-project/entities"
 	helpers "back-end1-mini-project/helper"
+	"back-end1-mini-project/mocks"
 	"back-end1-mini-project/repositories"
 	"time"
 )
@@ -17,12 +18,12 @@ type AdminUseCaseInterface interface {
 }
 
 type AdminUseCase struct {
-	adminRepo repositories.AdminRepository
-	//AdminRepo *mocks.MockAdminRepositoryInterface
+	AdminRepos repositories.AdminRepositoryInterface
+	AdminRepo  *mocks.MockAdminRepositoryInterface
 }
 
 func (uc AdminUseCase) LoginAdmin(username, password string) (*entities.Account, string, error) {
-	admin, err := uc.adminRepo.LoginAdmin(username)
+	admin, err := uc.AdminRepos.LoginAdmin(username)
 	if err != nil {
 		return nil, "", err
 	}
@@ -55,7 +56,7 @@ func (uc AdminUseCase) RegisterAdmin(admin AdminParam) (*entities.Account, error
 		UpdatedAt: time.Now(),
 	}
 
-	createdAdmin, err := uc.adminRepo.RegisterAdmin(newAdmin)
+	createdAdmin, err := uc.AdminRepos.RegisterAdmin(newAdmin)
 	if err != nil {
 		return nil, err
 	}
@@ -73,7 +74,7 @@ func (uc AdminUseCase) CreateCustomer(user *entities.Customer) (entities.Custome
 		UpdatedAt: time.Now(),
 	}
 
-	createdCustomer, err := uc.adminRepo.CreateCustomer(newCustomer)
+	createdCustomer, err := uc.AdminRepos.CreateCustomer(newCustomer)
 	if err != nil {
 		return *newCustomer, err
 	}
@@ -83,16 +84,16 @@ func (uc AdminUseCase) CreateCustomer(user *entities.Customer) (entities.Custome
 
 func (uc AdminUseCase) DeleteCustomerByID(id uint) error {
 	// Get Existing Customer Data
-	existingData, err := uc.adminRepo.GetCustomerById(id)
+	existingData, err := uc.AdminRepos.GetCustomerById(id)
 	if err != nil {
 		return err
 	}
 
-	return uc.adminRepo.DeleteCustomerById(id, existingData)
+	return uc.AdminRepos.DeleteCustomerById(id, existingData)
 }
 
 func (uc AdminUseCase) GetAllCustomers(firstName, lastName, email string, page, pageSize int) ([]*entities.Customer, error) {
-	users, err := uc.adminRepo.GetAllCustomers(firstName, lastName, email, page, pageSize)
+	users, err := uc.AdminRepos.GetAllCustomers(firstName, lastName, email, page, pageSize)
 	if err != nil {
 		return nil, err
 	}
@@ -103,7 +104,7 @@ func (uc AdminUseCase) GetAllCustomers(firstName, lastName, email string, page, 
 func (uc AdminUseCase) SaveCustomersFromAPI() error {
 	url := "https://reqres.in/api/users?page=2"
 
-	err := uc.adminRepo.SaveCustomersFromAPI(url)
+	err := uc.AdminRepos.SaveCustomersFromAPI(url)
 	if err != nil {
 		return err
 	}
