@@ -27,7 +27,7 @@ func NewAdminRouter(db *gorm.DB) *AdminRouter {
 }
 
 func (r *AdminRouter) Handle(router *gin.Engine) {
-	basePath := "/admin"
+	basePath := "/account-admin"
 
 	admin := router.Group(basePath)
 	{

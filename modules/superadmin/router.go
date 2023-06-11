@@ -16,7 +16,7 @@ func NewRouterSuperadmin(ctrl ControllerSuperadminInterface) *RouterSuperadmin {
 }
 
 func (r *RouterSuperadmin) Handle(router *gin.Engine) {
-	basePath := "/superadmin"
+	basePath := "/account-superadmin"
 
 	superadmin := router.Group(basePath)
 	superadmin.POST("/register", r.SuperadminRequestHandler.CreateSuperadmin)
@@ -24,13 +24,13 @@ func (r *RouterSuperadmin) Handle(router *gin.Engine) {
 
 	// About User
 	superadmin.Use(middleware.Authentication())
-	superadmin.GET("/users", r.SuperadminRequestHandler.GetAllUsers)
-	superadmin.POST("/create-user", r.SuperadminRequestHandler.CreateUser)
-	superadmin.DELETE("/delete-user/:id", r.SuperadminRequestHandler.DeleteUserByID)
+	superadmin.GET("/customers", r.SuperadminRequestHandler.GetAllUsers)
+	superadmin.POST("/create-customer", r.SuperadminRequestHandler.CreateUser)
+	superadmin.DELETE("/delete-customer/:id", r.SuperadminRequestHandler.DeleteUserByID)
 
 	// About Admin
 	superadmin.Use(middleware.Authentication())
-	superadmin.GET("/admins", r.SuperadminRequestHandler.GetAllAdmins)
+	superadmin.GET("/accounts", r.SuperadminRequestHandler.GetAllAdmins)
 	superadmin.POST("/:id/approved", r.SuperadminRequestHandler.ApproveAdminRegistration)
 	superadmin.POST("/:id/rejected", r.SuperadminRequestHandler.RejectAdminRegistration)
 	superadmin.POST("/:id/actived", r.SuperadminRequestHandler.UpdateAdminActiveStatus)
