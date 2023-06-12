@@ -36,10 +36,6 @@ type (
 		Password string
 		Name     string
 	}
-	//JWTConfig struct {
-	//	AccessToken  string
-	//	RefreshToken string
-	//}
 )
 
 // Get all env
@@ -62,10 +58,6 @@ func LoadConfig() (config *Config, err error) {
 			Password: os.Getenv("DB_PASSWORD"),
 			Name:     os.Getenv("DB_NAME"),
 		},
-		//JWTToken: JWTConfig{
-		//	AccessToken:  os.Getenv("ACCESS_TOKEN_KEY"),
-		//	RefreshToken: os.Getenv("REFRESH_TOKEN_KEY"),
-		//},
 	}
 
 	return config, nil
