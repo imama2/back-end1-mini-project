@@ -21,7 +21,7 @@ jobs:
 
       - name: Generate mock file
         run: |
-          go install github.com/golang/gomock
+          go install github.com/golang/mock
           go generate -v ./...
 
       - name: Run unit testing
