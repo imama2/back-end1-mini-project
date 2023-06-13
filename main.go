@@ -12,7 +12,7 @@ func main() {
 	router := gin.Default()
 	configdb, err := db2.LoadConfig()
 	if err != nil {
-		log.Printf("Config load error : ", err)
+		log.Printf("Config load error : %s", err)
 	}
 
 	db, err := db2.ConnectDB(configdb)
@@ -25,7 +25,7 @@ func main() {
 	customerRouter := customer.NewCustomerRouter(db)
 	customerRouter.Handle(router)
 
-	err = router.Run(":8080")
+	err = router.Run(":8081")
 	if err != nil {
 		fmt.Println("Error running server:", err)
 		return
