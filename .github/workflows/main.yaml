@@ -19,10 +19,10 @@ jobs:
       - name: Delete generated mock file if already exists
         run: find . -type f -name 'mock_*' -delete
 
-      - name: Generate mock file
-        run: |
-          go install github.com/golang/mock
-          go generate -v ./...
+#      - name: Generate mock file
+#        run: |
+#          go install github.com/golang/mock
+#          go generate -v ./...
 
       - name: Run unit testing
         run: go test -v ./...
