@@ -12,7 +12,7 @@ func main() {
 	router := gin.Default()
 	configdb, err := db2.LoadConfig()
 	if err != nil {
-		log.Printf("Config load error : ", err)
+		log.Printf("Config load error : %s", err)
 	}
 
 	db, err := db2.ConnectDB(configdb)
